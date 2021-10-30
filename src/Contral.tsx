@@ -30,11 +30,21 @@ const Contral: React.FC = (props) => {
 
   const setrate = (e) => {
     //
+    fetch("http://47.110.147.58:55557/api/get",{
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "access-control-allow-credentials": "true",
+        "access-control-allow-origin": "*",
+        "Content-Type": "application/json",
+      }
+    }).then(response =>response.json())
+    .then(res=>{console.log(res)})
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getrate([
+    setrate([
       formData.a,
       formData.b,
       formData.c,
