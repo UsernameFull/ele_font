@@ -23,23 +23,48 @@ const Contral: React.FC = (props) => {
     e: "0",
     f: "0",
   });
-  const getrate = (e) => {
-    //   fetch()
-    console.log(e);
-  };
-
-  const setrate = (e) => {
-    //
+  const getrate = () => {
     fetch("http://47.110.147.58:55557/api/get",{
       method: "GET",
       mode: "cors",
       headers: {
-        "access-control-allow-credentials": "true",
-        "access-control-allow-origin": "*",
-        "Content-Type": "application/json",
+        "content-type": "application/json",
       }
     }).then(response =>response.json())
-    .then(res=>{console.log(res)})
+    .then(res=>{
+      res = JSON.parse(res.shit)
+      console.log({
+        a: res[0],
+        b: res[1],
+        c: res[2],
+        d: res[3],
+        e: res[4],
+        f: res[5],
+      })
+    })
+  };
+
+  const setrate = (e) => {
+    fetch("http://47.110.147.58:55557/api/get",{
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "content-type": "application/json",
+      }
+    }).then(response =>response.json())
+    .then(res=>{
+      res = JSON.parse(res.shit)
+      console.log({
+        a: res[0],
+        b: res[1],
+        c: res[2],
+        d: res[3],
+        e: res[4],
+        f: res[5],
+      })
+    })
+  };
+
   };
 
   const handleSubmit = (e) => {
