@@ -45,27 +45,18 @@ const Contral: React.FC = (props) => {
   };
 
   const setrate = (e) => {
-    fetch("http://47.110.147.58:55557/api/get",{
-      method: "GET",
+    fetch("http://47.110.147.58:55557/api/post",{
+      method: "POST",
       mode: "cors",
       headers: {
         "content-type": "application/json",
-      }
-    }).then(response =>response.json())
-    .then(res=>{
-      res = JSON.parse(res.shit)
-      console.log({
-        a: res[0],
-        b: res[1],
-        c: res[2],
-        d: res[3],
-        e: res[4],
-        f: res[5],
+      },
+      body: JSON.stringify({
+        shit: formData
       })
     })
   };
 
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
