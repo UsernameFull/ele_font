@@ -100,7 +100,7 @@ const App: React.FC = () => {
           }
           tmpRes.push(json.data.msg);
           if (tmpRes.length == 5) {
-            let timeList = JSON.parse(JSON.stringify(tmpRes[0]));
+            let timeList = tmpRes[0];
             for (let i = 0; i < tmpRes[0].length; i++) {
               timeList[i].sensor1 = tmpRes[0][i].value;
               timeList[i].sensor2 = tmpRes[1][i].value;
@@ -171,7 +171,7 @@ const App: React.FC = () => {
       />
       <MyChart sensorData={state.sensorData} />
       <GasInfo gasData={sensorToGas()} />
-      <Contral formData = {state.rate}/>
+      <Contral Data = {state.rate}/>
       {/* <DataBox sensorName="name1" ticker={tickcount} sensornum="sensor1" /> */}
       {/* <DataBox sensorName="name2" ticker={tickcount} sensornum="sensor2" /> */}
       {/* <DataBox sensorName="name3" ticker={tickcount} sensornum="sensor3" /> */}

@@ -15,7 +15,8 @@ import {
 import React, { useState, useEffect } from "react";
 
 const Contral: React.FC = (props) => {
-  const [formData, setFormData] = useState(props.formData);
+  const { Data} = props;
+  const [formData, setFormData] = useState(Data);
   const setrate = (e) => {
     fetch("http://47.110.147.58:55557/api/post",{
       method: "POST",
@@ -40,7 +41,7 @@ const Contral: React.FC = (props) => {
     ]);
   };
   return (
-    <FormControl id="amount">
+    <FormControl>
       <SimpleGrid columns={2} spacing={1}>
         <Box>
           <InputGroup>
