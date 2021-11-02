@@ -134,7 +134,6 @@ const App: React.FC = () => {
         e: tmp[4],
         f: tmp[5],
       }});
-      console.log(state.rate);
     })
     .catch((error) => {
       console.log("getrate failed", error);
@@ -150,6 +149,7 @@ const App: React.FC = () => {
 
 
   const sensorToGas = () => {
+    console.log(state.rate);
     let res = [0.62, 2, 1];
     const base = 18000;
     let curr = state.sensorData[state.sensorData.length - 1]["sensor1"];
@@ -158,7 +158,6 @@ const App: React.FC = () => {
     return res;
   };
 
-  const gasInfoData = [0.6, 200, 200];
   return (
     <Box justify="center" align="center">
       <TitleBar />
