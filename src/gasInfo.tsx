@@ -35,12 +35,12 @@ const GasInfo: React.FC = (props) => {
         }
         height="30px"
       >
-        {gasData[1] + "ppm"}
+        {gasData[1].toString().slice(0,6) + "ppm"}
       </Box>
       <Box color="blue.500" height="30px">
         Ethanol:
       </Box>
-      <Box height="30px">{gasData[2] + "ppm"}</Box>
+      <Box height="30px">{gasData[2].toString().slice(0,6) + "ppm"}</Box>
     </SimpleGrid>
   );
 };

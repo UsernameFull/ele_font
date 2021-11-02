@@ -68,7 +68,7 @@ const MyChart: React.FC = (props) => {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="time" />
           <YAxis />
           <Tooltip />
           <Legend
