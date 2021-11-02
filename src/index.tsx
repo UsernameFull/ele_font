@@ -47,7 +47,14 @@ const App: React.FC = () => {
         sensor5: 100,
       },
     ],
-    rate:[0,0,0,0,0,0]
+    rate:{
+      a: "0",
+      b: "0",
+      c: "0",
+      d: "0",
+      e: "0",
+      f: "0",
+    }
   });
 
   const asyncFetch = () => {
@@ -70,9 +77,7 @@ const App: React.FC = () => {
           source: e,
         }),
       })
-        .then((response) => {
-          return response.json();
-        })
+        .then((response) =>(response.json()))
         .then((json) => {
           //时间戳转时分秒（北京时间）
           json.data.msg.map((e) => {
@@ -112,30 +117,36 @@ const App: React.FC = () => {
     });
   };
 
+  const getrate = ()=>{
+    fetch("http://47.110.147.58:55557/api/get",{
+      method: "GET",
+      mode: "cors",
+    })
+    .then((response) => (response.json()))
+    .then((rate) => {
+      let tmp = JSON.parse(rate.shit).map(e=>e.toString());
+      setState({...state, rate:{
+        a: tmp[0],
+        b: tmp[1],
+        c: tmp[2],
+        d: tmp[3],
+        e: tmp[4],
+        f: tmp[5],
+      }});
+      console.log(state.rate);
+    })
+    .catch((error) => {
+      console.log("getrate failed", error);
+    })
+  }
+
   useEffect(() => {
     if (tickcount === 1) {
       asyncFetch();
+      getrate();
     }
   }, [tickcount]);
 
-  const getrate = ()=>{
-    //
-    fetch("http://47.110.147.58:55556/api/getrate",{
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "access-control-allow-credentials": "true",
-        "access-control-allow-origin": "*",
-        "Content-Type": "application/json",
-      },
-    })
-    .then((response) => (response.json()))
-    .then((rate) => (
-      0//
-    ))
-    .catch()
-    return 0
-  }
 
   const sensorToGas = () => {
     let res = [0.62, 2, 1];
@@ -159,7 +170,7 @@ const App: React.FC = () => {
       />
       <MyChart sensorData={state.sensorData} />
       <GasInfo gasData={sensorToGas()} />
-      <Contral/>
+      <Contral formData = {state.rate}/>
       {/* <DataBox sensorName="name1" ticker={tickcount} sensornum="sensor1" /> */}
       {/* <DataBox sensorName="name2" ticker={tickcount} sensornum="sensor2" /> */}
       {/* <DataBox sensorName="name3" ticker={tickcount} sensornum="sensor3" /> */}

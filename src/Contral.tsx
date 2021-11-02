@@ -15,45 +15,15 @@ import {
 import React, { useState, useEffect } from "react";
 
 const Contral: React.FC = (props) => {
-  const [formData, setFormData] = useState({
-    a: "0",
-    b: "0",
-    c: "0",
-    d: "0",
-    e: "0",
-    f: "0",
-  });
-  const getrate = () => {
-    fetch("http://47.110.147.58:55557/api/get",{
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "content-type": "application/json",
-      }
-    }).then(response =>response.json())
-    .then(res=>{
-      res = JSON.parse(res.shit)
-      console.log({
-        a: res[0],
-        b: res[1],
-        c: res[2],
-        d: res[3],
-        e: res[4],
-        f: res[5],
-      })
-    })
-  };
-
+  const [formData, setFormData] = useState(props.formData);
   const setrate = (e) => {
     fetch("http://47.110.147.58:55557/api/post",{
       method: "POST",
       mode: "cors",
       headers: {
-        "content-type": "application/json",
+        "content-type": "application/x-www-form-urlencoded",
       },
-      body: JSON.stringify({
-        shit: formData
-      })
+      body: `shit=[${formData.a},${formData.b},${formData.c},${formData.d},${formData.e},${formData.f}]`
     })
   };
 
