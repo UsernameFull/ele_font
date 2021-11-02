@@ -46,16 +46,16 @@ const App: React.FC = () => {
         sensor4: 100,
         sensor5: 100,
       },
-    ],
-    rate:{
-      a: "0",
-      b: "0",
-      c: "0",
-      d: "0",
-      e: "0",
-      f: "0",
-    }
+    ]
   });
+  const [Rate,setRate] = useState({
+        a: "0",
+        b: "0",
+        c: "0",
+        d: "0",
+        e: "0",
+        f: "0",
+  })
 
   const asyncFetch = () => {
     let nowTime = Math.floor(new Date().valueOf() / 1000) - 5;
@@ -128,16 +128,14 @@ const App: React.FC = () => {
     .then((response) => (response.json()))
     .then((rate) => {
       let tmp = JSON.parse(rate.shit).map(e=>e.toString());
-      console.log(tmp);
-      setState({...state, rate:{
+      setRate({
         a: tmp[0],
         b: tmp[1],
         c: tmp[2],
         d: tmp[3],
         e: tmp[4],
         f: tmp[5],
-      }});
-      console.log(state.rate);
+      })
     })
     .catch((error) => {
       console.log("getrate failed", error);
@@ -174,7 +172,7 @@ const App: React.FC = () => {
       />
       <MyChart sensorData={state.sensorData} />
       <GasInfo gasData={sensorToGas()} />
-      <Contral Data = {state.rate}/>
+      <Contral Data = {Rate}/>
       {/* <DataBox sensorName="name1" ticker={tickcount} sensornum="sensor1" /> */}
       {/* <DataBox sensorName="name2" ticker={tickcount} sensornum="sensor2" /> */}
       {/* <DataBox sensorName="name3" ticker={tickcount} sensornum="sensor3" /> */}
