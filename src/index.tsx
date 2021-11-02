@@ -125,6 +125,7 @@ const App: React.FC = () => {
     .then((response) => (response.json()))
     .then((rate) => {
       let tmp = JSON.parse(rate.shit).map(e=>e.toString());
+      console.log(tmp);
       setState({...state, rate:{
         a: tmp[0],
         b: tmp[1],
