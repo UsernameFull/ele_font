@@ -60,8 +60,8 @@ const App: React.FC = () => {
   const asyncFetch = () => {
     let nowTime = Math.floor(new Date().valueOf() / 1000) - 5;
     const gasList = ["sensor1", "sensor2", "sensor3", "sensor4", "sensor5"];
-    let tmpRes = [];
-    gasList.forEach((e) => {
+    let tmpRes = new Map();
+    gasList.forEach((e:String) => {
       fetch("http://47.110.147.58:55556/api/getdata", {
         method: "POST",
         mode: "cors",
@@ -98,15 +98,18 @@ const App: React.FC = () => {
               json.data.msg[i].value = json.data.msg[i - 1].value;
             }
           }
-          tmpRes.push(json.data.msg);
-          if (tmpRes.length == 5) {
-            let timeList = tmpRes[0];
-            for (let i = 0; i < tmpRes[0].length; i++) {
-              timeList[i].sensor1 = tmpRes[0][i].value;
-              timeList[i].sensor2 = tmpRes[1][i].value;
-              timeList[i].sensor3 = tmpRes[2][i].value;
-              timeList[i].sensor4 = tmpRes[3][i].value;
-              timeList[i].sensor5 = tmpRes[4][i].value;
+        //   tmpRes[e]=json.data.msg;
+          tmpRes.set(e,json.data.msg)
+
+          if (tmpRes.size == 5) {
+            //   console.log(tmpRes);
+            let timeList = tmpRes.get("sensor1");
+            for (let i = 0; i < tmpRes.get("sensor1").length; i++) {
+              timeList[i].sensor1 = tmpRes.get("sensor1")[i].value;
+              timeList[i].sensor2 = tmpRes.get("sensor2")[i].value;
+              timeList[i].sensor3 = tmpRes.get("sensor3")[i].value;
+              timeList[i].sensor4 = tmpRes.get("sensor4")[i].value;
+              timeList[i].sensor5 = tmpRes.get("sensor5")[i].value;
             }
             setState({ ...state, sensorData: timeList });
           }
@@ -134,6 +137,7 @@ const App: React.FC = () => {
         e: tmp[4],
         f: tmp[5],
       }});
+      console.log(state.rate);
     })
     .catch((error) => {
       console.log("getrate failed", error);
@@ -149,7 +153,7 @@ const App: React.FC = () => {
 
 
   const sensorToGas = () => {
-    console.log(state.rate);
+    // console.log(state.rate);
     let res = [0.62, 2, 1];
     const base = 18000;
     let curr = state.sensorData[state.sensorData.length - 1]["sensor1"];
