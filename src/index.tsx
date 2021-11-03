@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, BrowserRouter, Route, Link } from 'react-router-dom';
 import { render } from "react-dom";
 import "./styles.css";
 
@@ -189,11 +189,11 @@ const App: React.FC = () => {
 const rootElement = document.getElementById("root");
 render(
     <ChakraProvider theme={theme}>
-        <BrowserRouter>
+        <Router>
             {/* <App /> */}
             <Route exact path="/" component={App} />
             <Route path="/back" component={Contral} />
-        </BrowserRouter>
+        </Router>
     </ChakraProvider>,
     rootElement
 );
