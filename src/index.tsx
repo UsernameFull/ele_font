@@ -56,6 +56,9 @@ const App: React.FC = () => {
         d: 0,
         e: 0,
         f: 0,
+        h:0,
+        i:0,
+        j:0
     })
 
     const asyncFetch = () => {
@@ -137,6 +140,9 @@ const App: React.FC = () => {
                     d: tmp[3],
                     e: tmp[4],
                     f: tmp[5],
+                    h: tmp[6],
+                    i: tmp[7],
+                    j: tmp[8],
                 })
             })
             .catch((error) => {
@@ -154,12 +160,11 @@ const App: React.FC = () => {
 
     const sensorToGas = () => {
         // console.log(state.rate);
-        let res = [0.62, 0.1, 0.1];
-        const base = 18000;
+        let res = [Rate.a, Rate.d, Rate.h];
         let curr = state.sensorData[state.sensorData.length - 1]["sensor1"];
-        res[0] = res[0]+(curr - Rate.a) * Rate.b
-        res[1] = res[1]+(curr - Rate.c) * Rate.d;
-        res[2] = res[2]+(curr - Rate.e) * Rate.f;
+        res[0] = res[0]+(curr - Rate.b) * Rate.c;
+        res[1] = res[1]+(curr - Rate.e) * Rate.f;
+        res[2] = res[2]+(curr - Rate.i) * Rate.j;
         return res;
     };
 

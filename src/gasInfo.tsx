@@ -20,7 +20,7 @@ const GasInfo: React.FC = (props) => {
         align="left"
         height="30px"
       >
-        {gasData[0] * 100 + "%"}
+        {(gasData[0] * 100).toString().slice(0,4) + "%"}
       </Box>
       <Box color="blue.500" height="30px">
         Formaldehyde:
